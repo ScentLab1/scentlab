@@ -263,7 +263,6 @@ body {
 }
 
 /* ====== REDES SOCIALES ====== */
-/* ====== REDES SOCIALES (CORREGIDO) ====== */
 .social-buttons {
   position: fixed;
   bottom: 20px;
@@ -354,5 +353,96 @@ body {
   }
   .hero-text h1 {
     font-size: 28px;
+  }
+}
+
+/* ====== MÓVIL PEQUEÑO ====== */
+@media (max-width: 600px) {
+  /* HERO */
+  .hero-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 50px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .hero-image img {
+    width: 260px;
+    height: auto;
+  }
+
+  /* COLECCIÓN */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .product img {
+    height: 220px;
+  }
+
+  /* FORMULARIO */
+  .contact-form input, .contact-form textarea {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* HEADER */
+  .main-nav a {
+    margin-left: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* CARRITO */
+  .cart {
+    min-width: 90%;
+    right: 5%;
+    bottom: 60px;
+    padding: 12px;
+  }
+
+  /* REDES SOCIALES */
+  .social-buttons {
+    flex-direction: row;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .social-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .social-btn img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* FOOTER */
+  .site-footer {
+    padding: 18px 10px;
+    font-size: 12px;
   }
 }
