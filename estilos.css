@@ -1,0 +1,358 @@
+/* SCENT LAB — Estilo Negro Mate y Dorado */
+:root {
+  --bg: #0b0b0b;
+  --gold: #d4af37;
+  --muted: #bdb6a7;
+  --white: #f5f4f2;
+  --container: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+}
+
+/* ====== HEADER ====== */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 40;
+  border-bottom: 1px solid rgba(212,175,55,0.06);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  height: 54px;
+}
+
+.brand-name {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  margin-left: 18px;
+  font-weight: 600;
+  opacity: 0.95;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.main-nav a:hover {
+  background: rgba(212,175,55,0.1);
+  color: var(--gold);
+}
+
+/* ====== HERO ====== */
+.hero {
+  padding: 80px 0;
+  background: radial-gradient(circle at top left, rgba(212,175,55,0.06), transparent 70%);
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1 1 45%;
+}
+
+.hero-text h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.lead {
+  color: var(--muted);
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.hero-image {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+  transition: transform 0.4s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);
+}
+
+/* ====== COLECCIÓN ====== */
+.coleccion {
+  padding: 50px 0;
+}
+
+.coleccion h2 {
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  margin-top: 18px;
+}
+
+.product {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.product img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.price {
+  color: var(--gold);
+  font-weight: 800;
+  margin-top: 12px;
+}
+
+/* ====== SECCIONES ====== */
+.seccion {
+  display: none;
+}
+
+.mision, .nosotros, .contacto {
+  padding: 40px 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ====== FORMULARIO ====== */
+.contact-form {
+  display: grid;
+  gap: 12px;
+  max-width: 640px;
+  margin-top: 12px;
+}
+
+.contact-form input, .contact-form textarea {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 12px;
+  border-radius: 8px;
+  color: var(--white);
+}
+
+/* ====== BOTONES ====== */
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: var(--gold);
+  color: #111;
+}
+
+.btn.primary:hover {
+  background: #f0d768;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+
+.btn.ghost:hover {
+  background: rgba(212,175,55,0.1);
+}
+
+/* ====== CARRITO ====== */
+.cart {
+  position: fixed;
+  right: 18px;
+  bottom: 80px;
+  z-index: 60;
+  background: #111;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  display: none;
+  min-width: 320px;
+  text-align: center;
+}
+
+.cart h3 {
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.cart-item button {
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.total {
+  font-weight: bold;
+  margin-top: 10px;
+  color: var(--gold);
+}
+
+/* ====== REDES SOCIALES ====== */
+/* ====== REDES SOCIALES (CORREGIDO) ====== */
+.social-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 9999;
+}
+
+.social-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.9), rgba(0,0,0,0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(212,175,55,0.4);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212,175,55,0.5);
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(212,175,55,0.8);
+  background: radial-gradient(circle, rgba(255,220,100,0.9), rgba(0,0,0,0.9));
+}
+
+.social-btn img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(1.2) contrast(1.1);
+}
+
+/* ====== RECIBO MODAL ====== */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.receipt-box {
+  background: #111;
+  color: var(--white);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 20px;
+  width: 340px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(212,175,55,0.2);
+}
+
+.receipt-box h2 {
+  color: var(--gold);
+  margin-top: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ====== FOOTER ====== */
+.site-footer {
+  padding: 22px 0;
+  border-top: 1px solid rgba(212,175,55,0.04);
+  text-align: center;
+  color: var(--muted);
+  margin-top: 30px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width: 900px){
+  .hero-inner {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-text h1 {
+    font-size: 28px;
+  }
+}

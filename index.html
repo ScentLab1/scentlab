@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SCENT LAB — Fragancias de Lujo</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <img src="img/logo.png" alt="Scent Lab logo" class="logo">
+      <span class="brand-name">SCENT LAB</span>
+    </div>
+    <nav class="main-nav">
+      <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
+      <a href="#" onclick="mostrarSeccion('coleccion')">Colección</a>
+      <a href="#" onclick="mostrarSeccion('mision')">Misión</a>
+      <a href="#" onclick="mostrarSeccion('nosotros')">Nosotros</a>
+      <a href="#" onclick="mostrarSeccion('contacto')">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-toggle" onclick="toggleCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="inicio" class="seccion hero fade-in">
+    <div class="hero-inner container">
+      <div class="hero-text">
+        <h1>Fragancias que inspiran poder y elegancia</h1>
+        <p class="lead">No es solo un aroma — es tu firma personal.</p>
+        <a class="btn primary" href="#" onclick="mostrarSeccion('coleccion')">Explorar colección</a>
+      </div>
+      <div class="hero-image">
+        <img src="img/signature.jpg" alt="Scent Lab Signature">
+      </div>
+    </div>
+  </section>
+
+  <section id="coleccion" class="seccion coleccion container">
+    <h2>Colección destacada</h2>
+    <p class="muted">Ediciones seleccionadas con notas exclusivas.</p>
+    <div class="grid">
+      <div class="product">
+        <img src="img/signature.jpg" alt="Scent Lab Signature">
+        <h3>Scent Lab Signature</h3>
+        <p class="desc">Aromas amaderados con corazón de ámbar y toque cítrico — estela duradera.</p>
+        <p class="price">$120.000</p>
+        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Signature',120000)">Agregar al carrito</button></div>
+      </div>
+      <div class="product">
+        <img src="img/velvet.jpg" alt="Scent Lab Velvet Bloom">
+        <h3>Scent Lab Velvet Bloom</h3>
+        <p class="desc">Jazmín y rosa sobre una base almizclada, elegante y seductora.</p>
+        <p class="price">$95.000</p>
+        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Velvet Bloom',95000)">Agregar al carrito</button></div>
+      </div>
+      <div class="product">
+        <img src="img/black.jpg" alt="Scent Lab Black Essence">
+        <h3>Scent Lab Black Essence</h3>
+        <p class="desc">Esencia oscura con notas intensas y sofisticadas — presencia inolvidable.</p>
+        <p class="price">$145.000</p>
+        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Black Essence',145000)">Agregar al carrito</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mision" class="seccion mision container">
+    <h2>Misión</h2>
+    <p class="muted">Crear fragancias premium que permitan a cada persona expresar su identidad y generar recuerdos memorables, cuidando la calidad y sostenibilidad en cada paso.</p>
+  </section>
+
+  <section id="nosotros" class="seccion nosotros container">
+    <h2>Quiénes somos</h2>
+    <p class="muted">En SCENT LAB combinamos ciencia y arte olfativo. Desarrollamos tiradas limitadas, trabajamos con perfumistas y seleccionamos ingredientes trazables.</p>
+  </section>
+
+  <section id="contacto" class="seccion contacto container">
+    <h2>Contacto</h2>
+    <p class="muted">Escríbenos para pedidos, colaboraciones o consultas.</p>
+    <form onsubmit="return enviarFormulario(event)" class="contact-form">
+      <label><span>Nombre</span><input type="text" id="nombre" required></label>
+      <label><span>Correo</span><input type="email" id="correo" required></label>
+      <label><span>Mensaje</span><textarea id="mensaje" rows="4" required></textarea></label>
+      <div class="form-actions">
+        <button class="btn ghost" type="reset">Limpiar</button>
+        <button class="btn primary" type="submit">Enviar</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<!-- CARRITO -->
+<div id="cartContainer" class="cart">
+  <h3>Tu carrito</h3>
+  <div id="cartEmpty" class="muted">Carrito vacío</div>
+  <div id="cartItems"></div>
+  <p class="total">Total: $<span id="cartTotal">0</span></p>
+  <button class="btn ghost" onclick="vaciarCarrito()">Vaciar carrito</button>
+  <button class="btn primary" onclick="checkout()">Finalizar compra</button>
+</div>
+
+<!-- REDES SOCIALES -->
+<div class="social-buttons">
+  <a href="https://wa.me/573001112233" class="social-btn whatsapp" target="_blank"><img src="img/whatsapp.png" alt="WhatsApp"></a>
+  <a href="https://facebook.com/example" class="social-btn facebook" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+  <a href="https://instagram.com/example" class="social-btn instagram" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+</div>
+
+<!-- RECIBO -->
+<div id="receiptOverlay" class="overlay">
+  <div id="receiptContent" class="receipt-box"></div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 SCENT LAB · Todos los derechos reservados</p>
+    <p class="small muted">Contacto: contacto@scentlab.com · Tel: +57 300 000 0000</p>
+  </div>
+</footer>
+
+<script src="scripts.js"></script>
+</body>
+</html>
