@@ -537,3 +537,14 @@ p.muted {
     margin: 0;
   }
 }
+/* ===== CORRECCIÓN VISIBILIDAD DE SECCIONES ===== */
+.seccion {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.seccion.active {
+  display: block !important;
+  opacity: 1 !important;
+}
