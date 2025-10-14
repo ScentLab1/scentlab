@@ -1,7 +1,7 @@
-// ======== VARIABLES GLOBALES ========
+// ==================== VARIABLES GLOBALES ====================
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// ======== FUNCIONES PRINCIPALES ========
+// ==================== SECCIONES Y NAVEGACIÓN ====================
 function mostrarSeccion(id) {
   document.querySelectorAll(".seccion").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
@@ -14,22 +14,22 @@ function mostrarSeccion(id) {
   }
 }
 
-// ======== SCROLL SUAVE Y ACTIVACIÓN ========
+// Desplazamiento suave y activación de sección
 function scrollToSection(id) {
-  mostrarSeccion(id); // activa la sección
+  mostrarSeccion(id); // activa la sección correspondiente
   const section = document.getElementById(id);
   if (section) {
     section.scrollIntoView({ behavior: "smooth" });
   }
 }
 
-// ======== MENÚ MÓVIL ========
+// Menú móvil (botón ☰)
 function toggleMenu() {
   const nav = document.getElementById("mainNav");
   nav.classList.toggle("active");
 }
 
-// ======== CARRITO ========
+// ==================== CARRITO ====================
 function toggleCart() {
   const cart = document.getElementById("cartContainer");
   cart.style.display = (cart.style.display === "block") ? "none" : "block";
@@ -83,7 +83,7 @@ function actualizarCarrito() {
       <div class="cart-item">
         <div>
           <strong>${item.nombre}</strong><br>
-          <small>$${item.precio.toLocaleString()} x ${item.cantidad}</small>
+          <small>$${item.precio.toLocaleString()} × ${item.cantidad}</small>
         </div>
         <div class="cart-controls">
           <button class="btn-control" onclick="cambiarCantidad(${i}, -1)">➖</button>
@@ -99,12 +99,12 @@ function actualizarCarrito() {
   empty.style.display = carrito.length ? "none" : "block";
 }
 
-// ======== GUARDAR LOCALSTORAGE ========
+// ==================== LOCALSTORAGE ====================
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-// ======== FINALIZAR COMPRA ========
+// ==================== FINALIZAR COMPRA ====================
 function checkout() {
   if (carrito.length === 0) {
     alert("Tu carrito está vacío.");
@@ -139,7 +139,7 @@ function cerrarRecibo() {
   document.getElementById("receiptOverlay").style.display = "none";
 }
 
-// ======== DESCARGAR PDF ========
+// ==================== DESCARGAR PDF ====================
 async function descargarPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
@@ -205,7 +205,7 @@ async function descargarPDF() {
   cerrarRecibo();
 }
 
-// ======== FORMULARIO ========
+// ==================== FORMULARIO ====================
 function enviarFormulario(e) {
   e.preventDefault();
   alert("Gracias por contactarnos. Te responderemos pronto 💌");
@@ -213,7 +213,7 @@ function enviarFormulario(e) {
   return false;
 }
 
-// ======== TOAST (MENSAJE FLOTANTE) ========
+// ==================== TOAST ====================
 function mostrarToast(mensaje) {
   const toast = document.createElement("div");
   toast.textContent = mensaje;
@@ -227,5 +227,5 @@ function mostrarToast(mensaje) {
   }, 2500);
 }
 
-// ======== INICIALIZAR ========
+// ==================== INICIALIZACIÓN ====================
 document.addEventListener("DOMContentLoaded", actualizarCarrito);
