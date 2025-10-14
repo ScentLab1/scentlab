@@ -15,13 +15,18 @@
       <img src="img/logo.png" alt="Scent Lab logo" class="logo">
       <span class="brand-name">SCENT LAB</span>
     </div>
-    <nav class="main-nav">
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="main-nav" id="mainNav">
       <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
       <a href="#" onclick="mostrarSeccion('coleccion')">Colección</a>
-      <a href="#" onclick="mostrarSeccion('mision')">Misión</a>
       <a href="#" onclick="mostrarSeccion('nosotros')">Nosotros</a>
       <a href="#" onclick="mostrarSeccion('contacto')">Contacto</a>
     </nav>
+
+    <!-- BOTÓN DE MENÚ MÓVIL -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
     <div class="header-actions">
       <button class="cart-toggle" onclick="toggleCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
     </div>
@@ -29,12 +34,13 @@
 </header>
 
 <main>
-  <section id="inicio" class="seccion hero fade-in">
+  <!-- INICIO -->
+  <section id="inicio" class="seccion hero active">
     <div class="hero-inner container">
       <div class="hero-text">
         <h1>Fragancias que inspiran poder y elegancia</h1>
         <p class="lead">No es solo un aroma — es tu firma personal.</p>
-        <a class="btn primary" href="#" onclick="mostrarSeccion('coleccion')">Explorar colección</a>
+        <a class="btn primary" href="#" onclick="scrollToSection('coleccion')">Explorar colección</a>
       </div>
       <div class="hero-image">
         <img src="img/signature.jpg" alt="Scent Lab Signature">
@@ -42,45 +48,124 @@
     </div>
   </section>
 
+  <!-- COLECCIÓN -->
   <section id="coleccion" class="seccion coleccion container">
     <h2>Colección destacada</h2>
-    <p class="muted">Ediciones seleccionadas con notas exclusivas.</p>
-    <div class="grid">
-      <div class="product">
-        <img src="img/signature.jpg" alt="Scent Lab Signature">
-        <h3>Scent Lab Signature</h3>
-        <p class="desc">Aromas amaderados con corazón de ámbar y toque cítrico — estela duradera.</p>
-        <p class="price">$120.000</p>
-        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Signature',120000)">Agregar al carrito</button></div>
+    <p class="muted">Fragancias cuidadosamente seleccionadas para él y para ella.</p>
+
+    <!-- HOMBRES -->
+    <div class="categoria">
+      <h3 class="categoria-titulo">👔 Fragancias para Hombres</h3>
+      <div class="grid">
+        <div class="product">
+          <img src="img/lattafa_fakhar_black.jpg" alt="Lattafa Fakhar Black">
+          <h3>Lattafa Fakhar Black</h3>
+          <p class="desc">Aroma intenso con notas amaderadas, ámbar y especias orientales.</p>
+          <p class="price">$140.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Lattafa Fakhar Black',140000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/allure_homme_sport.jpg" alt="Allure Homme Sport">
+          <h3>Allure Homme Sport</h3>
+          <p class="desc">Fragancia fresca con notas cítricas, almizcle y maderas blancas.</p>
+          <p class="price">$180.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Allure Homme Sport',180000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/kalos_sport.jpg" alt="Kalos Sport">
+          <h3>Kalos Sport</h3>
+          <p class="desc">Aroma moderno con acordes de bergamota, vetiver y maderas finas.</p>
+          <p class="price">$130.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Kalos Sport',130000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/homme_intense.jpg" alt="Homme Intense">
+          <h3>Homme Intense</h3>
+          <p class="desc">Notas profundas de cuero, madera y ámbar con un toque elegante.</p>
+          <p class="price">$190.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Homme Intense',190000)">Agregar al carrito</button></div>
+        </div>
       </div>
-      <div class="product">
-        <img src="img/velvet.jpg" alt="Scent Lab Velvet Bloom">
-        <h3>Scent Lab Velvet Bloom</h3>
-        <p class="desc">Jazmín y rosa sobre una base almizclada, elegante y seductora.</p>
-        <p class="price">$95.000</p>
-        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Velvet Bloom',95000)">Agregar al carrito</button></div>
+    </div>
+
+    <!-- MUJERES -->
+    <div class="categoria">
+      <h3 class="categoria-titulo">👠 Fragancias para Mujeres</h3>
+      <div class="grid">
+        <div class="product">
+          <img src="img/my_way_parfum.jpg" alt="My Way Parfum">
+          <h3>My Way Parfum</h3>
+          <p class="desc">Fragancia elegante y femenina con notas florales y fondo de vainilla.</p>
+          <p class="price">$175.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('My Way Parfum',175000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/yves_saint_laurent.jpg" alt="Yves Saint Laurent">
+          <h3>Yves Saint Laurent (Black Opium)</h3>
+          <p class="desc">Notas de jazmín, almizcle blanco y flores exóticas de elegancia pura.</p>
+          <p class="price">$210.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Yves Saint Laurent',210000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/orange.jpg" alt="Orange">
+          <h3>Orange</h3>
+          <p class="desc">Toques cítricos y dulces con esencia de azahar y madera suave.</p>
+          <p class="price">$120.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Orange',120000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/herbes_vives.jpg" alt="Herbes Vives">
+          <h3>Herbes Vives</h3>
+          <p class="desc">Aroma fresco con notas verdes, florales y un fondo ligeramente frutal.</p>
+          <p class="price">$135.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Herbes Vives',135000)">Agregar al carrito</button></div>
+        </div>
       </div>
-      <div class="product">
-        <img src="img/black.jpg" alt="Scent Lab Black Essence">
-        <h3>Scent Lab Black Essence</h3>
-        <p class="desc">Esencia oscura con notas intensas y sofisticadas — presencia inolvidable.</p>
-        <p class="price">$145.000</p>
-        <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Black Essence',145000)">Agregar al carrito</button></div>
+    </div>
+
+    <!-- EXCLUSIVA -->
+    <div class="categoria">
+      <h3 class="categoria-titulo">✨ Colección Exclusiva SCENT LAB</h3>
+      <div class="grid">
+        <div class="product">
+          <img src="img/signature.jpg" alt="Scent Lab Signature">
+          <h3>Scent Lab Signature</h3>
+          <p class="desc">Aromas amaderados con corazón de ámbar y toque cítrico — estela duradera.</p>
+          <p class="price">$120.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Signature',120000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/velvet.jpg" alt="Scent Lab Velvet Bloom">
+          <h3>Scent Lab Velvet Bloom</h3>
+          <p class="desc">Jazmín y rosa sobre una base almizclada, elegante y seductora.</p>
+          <p class="price">$95.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Velvet Bloom',95000)">Agregar al carrito</button></div>
+        </div>
+        <div class="product">
+          <img src="img/black.jpg" alt="Scent Lab Black Essence">
+          <h3>Scent Lab Black Essence</h3>
+          <p class="desc">Esencia oscura con notas intensas y sofisticadas — presencia inolvidable.</p>
+          <p class="price">$145.000</p>
+          <div class="actions"><button class="btn primary" onclick="agregarAlCarrito('Scent Lab Black Essence',145000)">Agregar al carrito</button></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="mision" class="seccion mision container">
-    <h2>Misión</h2>
-    <p class="muted">Crear fragancias premium que permitan a cada persona expresar su identidad y generar recuerdos memorables, cuidando la calidad y sostenibilidad en cada paso.</p>
-  </section>
-
-  <section id="nosotros" class="seccion nosotros container">
-    <h2>Quiénes somos</h2>
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="seccion container">
+    <h2>Nosotros</h2>
     <p class="muted">En SCENT LAB combinamos ciencia y arte olfativo. Desarrollamos tiradas limitadas, trabajamos con perfumistas y seleccionamos ingredientes trazables.</p>
+
+    <h3>Misión</h3>
+    <p>La misión de Scentlab es crear experiencias sensoriales únicas a través de lociones corporales de alta calidad, fusionando la ciencia, la innovación y la sostenibilidad. Lo que buscamos es que cada fragancia refleje la identidad y el estilo de vida de nuestros clientes, brindando bienestar y confianza mediante productos elaborados con ingredientes seguros y responsables con el medio ambiente. Nuestro compromiso es que cualquier persona tenga acceso a fragancias de alta calidad, permitiendo que personas de todos los estratos disfruten de productos de calidad premium sin pagar precios excesivos. En Scentlab, cada loción es una historia de autenticidad, cuidado y elegancia, desarrollada bajo altos estándares de calidad y respeto por la piel y el planeta, poniendo la experiencia que se puede llevar el cliente más allá de lo material, todo esto mediante la innovación.</p>
+
+    <h3>Visión</h3>
+    <p>La visión de Scentlab es ser reconocida como una marca líder en innovación olfativa en Colombia y Latinoamérica, consolidándose como una empresa referente por su capacidad para integrar tecnología, personalización y compromiso ambiental en el sector de fragancias y cuidado personal. Nuestra aspiración es construir una comunidad de clientes leales que valoren la autenticidad y la excelencia, soñando con expandir nuestras operaciones hacia mercados extranjeros, manteniendo siempre nuestros pilares: calidad e innovación. Scentlab no busca solo vender productos, sino experiencias que transformen la forma en que las personas se conectan con su aroma, su piel y su entorno.</p>
   </section>
 
-  <section id="contacto" class="seccion contacto container">
+  <!-- CONTACTO -->
+  <section id="contacto" class="seccion container">
     <h2>Contacto</h2>
     <p class="muted">Escríbenos para pedidos, colaboraciones o consultas.</p>
     <form onsubmit="return enviarFormulario(event)" class="contact-form">
@@ -105,22 +190,28 @@
   <button class="btn primary" onclick="checkout()">Finalizar compra</button>
 </div>
 
-<!-- REDES SOCIALES -->
-<div class="social-buttons">
-  <a href="https://wa.me/573001112233" class="social-btn whatsapp" target="_blank"><img src="img/whatsapp.png" alt="WhatsApp"></a>
-  <a href="https://facebook.com/example" class="social-btn facebook" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-  <a href="https://instagram.com/example" class="social-btn instagram" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
-</div>
-
 <!-- RECIBO -->
 <div id="receiptOverlay" class="overlay">
-  <div id="receiptContent" class="receipt-box"></div>
+  <div id="receiptContent" class="receipt-box">
+    <img src="img/logo.png" alt="Scent Lab" style="width:80px; margin-bottom:10px;">
+    <h3>Recibo de compra</h3>
+    <div id="receiptDetails"></div>
+    <p class="muted" id="receiptDate"></p>
+    <button class="btn primary" onclick="descargarPDF()">Descargar PDF</button>
+    <button class="btn ghost" onclick="cerrarRecibo()">Cerrar</button>
+  </div>
+</div>
+
+<!-- REDES SOCIALES -->
+<div class="social-buttons">
+  <a href="https://wa.me/573001112233" class="social-btn" target="_blank"><img src="img/whatsapp.png" alt="WhatsApp"></a>
+  <a href="https://facebook.com" class="social-btn" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+  <a href="https://instagram.com" class="social-btn" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
 </div>
 
 <footer class="site-footer">
   <div class="container">
     <p>© 2025 SCENT LAB · Todos los derechos reservados</p>
-    <p class="small muted">Contacto: contacto@scentlab.com · Tel: +57 300 000 0000</p>
   </div>
 </footer>
 
