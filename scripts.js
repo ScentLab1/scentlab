@@ -6,18 +6,35 @@ function mostrarSeccion(id) {
   document.querySelectorAll(".seccion").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Cierra el menú móvil si está abierto
+  const nav = document.getElementById("mainNav");
+  if (nav && nav.classList.contains("active")) {
+    nav.classList.remove("active");
+  }
 }
 
+// ======== SCROLL SUAVE Y ACTIVACIÓN ========
 function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  mostrarSeccion(id); // activa la sección
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
+// ======== MENÚ MÓVIL ========
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("active");
+}
+
+// ======== CARRITO ========
 function toggleCart() {
   const cart = document.getElementById("cartContainer");
   cart.style.display = (cart.style.display === "block") ? "none" : "block";
 }
 
-// ======== CARRITO ========
 function agregarAlCarrito(nombre, precio) {
   const productoExistente = carrito.find(p => p.nombre === nombre);
   if (productoExistente) {
@@ -212,8 +229,3 @@ function mostrarToast(mensaje) {
 
 // ======== INICIALIZAR ========
 document.addEventListener("DOMContentLoaded", actualizarCarrito);
-// ======== MENÚ MÓVIL ========
-function toggleMenu() {
-  const nav = document.getElementById("mainNav");
-  nav.classList.toggle("active");
-}
