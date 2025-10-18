@@ -563,4 +563,49 @@ p.muted {
 #langToggle:hover {
   background: var(--gold);
   color: #000;
+}/* 🌐 FIX — Botones de redes sociales sin fondo dorado al pasar el mouse */
+.social-buttons {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 9999;
 }
+
+.social-buttons a.social-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: transparent; /* sin fondo visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none; /* sin sombra */
+  transition: transform 0.2s ease;
+}
+
+.social-buttons a.social-btn:hover {
+  transform: scale(1.15); /* agranda suavemente */
+  background: transparent; /* mantiene fondo transparente */
+}
+
+.social-buttons img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .social-buttons a.social-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-buttons img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
