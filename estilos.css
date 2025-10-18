@@ -548,3 +548,19 @@ p.muted {
   display: block !important;
   opacity: 1 !important;
 }
+#langToggle {
+  margin-left: 10px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+#langToggle:hover {
+  background: var(--gold);
+  color: #000;
+}

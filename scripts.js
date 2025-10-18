@@ -229,3 +229,171 @@ function mostrarToast(mensaje) {
 
 // ==================== INICIALIZACIÓN ====================
 document.addEventListener("DOMContentLoaded", actualizarCarrito);
+// ==================== CAMBIO DE IDIOMA GLOBAL ====================
+// ==================== CAMBIO DE IDIOMA TOTAL (DETECCIÓN FLEXIBLE) ====================
+let currentLang = "es";
+let originalTexts = {};
+
+const translations = {
+  en: {
+    // --- Navegación ---
+    "inicio": "Home",
+    "colección": "Collection",
+    "nosotros": "About Us",
+    "contacto": "Contact",
+    "explorar colección": "Explore Collection",
+    "fragancias que inspiran poder y elegancia": "Fragrances that inspire power and elegance",
+    "no es solo un aroma — es tu firma personal.": "Not just a scent — it's your personal signature.",
+    "colección destacada": "Featured Collection",
+    "fragancias cuidadosamente seleccionadas para él y para ella.": "Fragrances carefully selected for him and her.",
+
+    // --- Secciones de productos ---
+    "fragancias para hombres": "Men’s Fragrances",
+    "fragancias para mujeres": "Women’s Fragrances",
+    "colección exclusiva scent lab": "Exclusive SCENT LAB Collection",
+
+    // --- Carrito ---
+    "tu carrito": "Your Cart",
+    "carrito vacío": "Empty Cart",
+    "vaciar carrito": "Empty Cart",
+    "finalizar compra": "Checkout",
+    "recibo de compra": "Purchase Receipt",
+    "descargar pdf": "Download PDF",
+    "cerrar": "Close",
+
+    // --- Contacto ---
+    "escríbenos para pedidos, colaboraciones o consultas.": "Write to us for orders, collaborations or inquiries.",
+    "nombre": "Name",
+    "correo": "Email",
+    "mensaje": "Message",
+    "limpiar": "Clear",
+    "enviar": "Send",
+
+    // --- Nosotros ---
+    "nosotros": "About Us",
+    "misión": "Mission",
+    "visión": "Vision",
+    "en scent lab combinamos ciencia y arte olfativo. desarrollamos tiradas limitadas, trabajamos con perfumistas y seleccionamos ingredientes trazables.":
+      "At SCENT LAB, we combine science and the art of fragrance creation. We develop limited-edition batches, collaborate with perfumers, and carefully select traceable ingredients.",
+
+    // --- Misión y Visión ---
+    "mision_text": `Scentlab’s mission is to create unique sensory experiences through high-quality body lotions, blending science, innovation, and sustainability. We aim for every fragrance to reflect our clients’ identity and lifestyle, providing well-being and confidence through products made with safe, environmentally responsible ingredients. Our commitment is to ensure that everyone has access to premium fragrances, allowing people of all backgrounds to enjoy high-end products without paying excessive prices. At Scentlab, every lotion tells a story of authenticity, care, and elegance, crafted under the highest standards of quality and respect for both skin and the planet, elevating the client’s experience beyond the material through innovation.`,
+    
+    "vision_text": `Scentlab’s vision is to be recognized as a leading brand in olfactory innovation in Colombia and Latin America, standing out for integrating technology, personalization, and environmental commitment in the fragrance and personal care industry. Our goal is to build a loyal community of clients who value authenticity and excellence, while expanding internationally — always maintaining our pillars of quality and innovation. Scentlab doesn’t just sell products, it sells experiences that transform how people connect with their scent, their skin, and their surroundings.`,
+
+    // --- Descripciones de productos ---
+    "aromas amaderados": "Woody aromas with amber heart and citrus touch — long-lasting trail.",
+    "jazmín y rosa": "Jasmine and rose on a musky base — elegant and seductive.",
+    "esencia oscura": "Dark essence with intense, sophisticated notes — unforgettable presence.",
+    "aroma intenso": "Intense aroma with woody notes, amber, and oriental spices.",
+    "fragancia fresca": "Fresh fragrance with citrus, musk, and white woods.",
+    "aroma moderno": "Modern scent with bergamot, vetiver, and fine woods.",
+    "notas profundas": "Deep notes of leather, wood, and amber with an elegant touch.",
+    "fragancia elegante": "Elegant feminine fragrance with floral notes and vanilla base.",
+    "notas de jazmín": "Jasmine, white musk, and exotic flowers of pure elegance.",
+    "toques cítricos": "Citrus and sweet touches with orange blossom and soft wood essence.",
+    "aroma fresco": "Fresh scent with green, floral, and slightly fruity notes."
+  }
+};
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/[\n\r\t]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function toggleLanguage() {
+  const isToEnglish = currentLang === "es";
+  const dict = translations.en;
+  const langBtn = document.getElementById("langToggle");
+
+  // Guardar textos originales solo una vez
+  if (Object.keys(originalTexts).length === 0) {
+    document.querySelectorAll("h1, h2, h3, p, a, button, span, label, strong").forEach((el, i) => {
+      originalTexts[i] = el.textContent.trim();
+      el.dataset.textId = i;
+    });
+  }
+
+  // Traducir textos generales (con detección flexible)
+  document.querySelectorAll("h1, h2, h3, p, a, button, span, label, strong").forEach(el => {
+    const id = el.dataset.textId;
+    if (!id) return;
+    const original = originalTexts[id];
+    const norm = normalizeText(original);
+
+    if (isToEnglish) {
+      let t = dict[norm];
+
+      // Traducción por palabras clave (para títulos)
+      if (!t) {
+        if (norm.includes("hombres")) t = "Men’s Fragrances";
+        else if (norm.includes("mujeres")) t = "Women’s Fragrances";
+        else if (norm.includes("colección exclusiva")) t = "Exclusive SCENT LAB Collection";
+      }
+
+      if (t) el.textContent = t;
+    } else {
+      el.textContent = original;
+    }
+  });
+
+  // Traducir descripciones (.desc) — coincidencia parcial
+  document.querySelectorAll(".desc").forEach(el => {
+    if (!el.dataset.originalText) el.dataset.originalText = el.textContent.trim();
+    if (isToEnglish) {
+      const norm = normalizeText(el.dataset.originalText);
+      let found = false;
+      for (const [key, val] of Object.entries(dict)) {
+        if (norm.includes(key)) { // ← aquí está la diferencia clave
+          el.textContent = val;
+          found = true;
+          break;
+        }
+      }
+      if (!found) el.textContent = el.dataset.originalText; // si no se encuentra, deja el original
+    } else {
+      el.textContent = el.dataset.originalText;
+    }
+  });
+
+  // Traducir carrito
+  const cartButton = document.querySelector(".cart-toggle");
+  const count = document.getElementById("cartCount")?.textContent || "0";
+  if (cartButton) {
+    cartButton.innerHTML = isToEnglish
+      ? `🛒 Cart (<span id="cartCount">${count}</span>)`
+      : `🛒 Carrito (<span id="cartCount">${count}</span>)`;
+  }
+
+  const cartTitle = document.querySelector("#cartContainer h3");
+  const cartEmpty = document.getElementById("cartEmpty");
+  const checkoutBtn = document.querySelector("#cartContainer .btn.primary");
+  const clearBtn = document.querySelector("#cartContainer .btn.ghost");
+
+  if (cartTitle) cartTitle.textContent = isToEnglish ? "Your Cart" : "Tu carrito";
+  if (cartEmpty) cartEmpty.textContent = isToEnglish ? "Empty Cart" : "Carrito vacío";
+  if (checkoutBtn) checkoutBtn.textContent = isToEnglish ? "Checkout" : "Finalizar compra";
+  if (clearBtn) clearBtn.textContent = isToEnglish ? "Empty Cart" : "Vaciar carrito";
+
+  // Traducir misión y visión
+  const nosotros = document.getElementById("nosotros");
+  if (nosotros) {
+    const p = nosotros.querySelectorAll("p");
+    if (p.length >= 3) {
+      if (isToEnglish) {
+        p[1].textContent = dict["mision_text"];
+        p[2].textContent = dict["vision_text"];
+      } else {
+        p[1].textContent = originalTexts[p[1].dataset.textId];
+        p[2].textContent = originalTexts[p[2].dataset.textId];
+      }
+    }
+  }
+
+  // Cambiar idioma actual
+  currentLang = isToEnglish ? "en" : "es";
+  langBtn.textContent = currentLang === "es" ? "EN / ES" : "ES / EN";
+}
