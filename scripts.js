@@ -311,14 +311,14 @@ function toggleLanguage() {
 
   // Guardar textos originales solo una vez
   if (Object.keys(originalTexts).length === 0) {
-    document.querySelectorAll("h1, h2, h3, p, a, button, span, label, strong").forEach((el, i) => {
+    document.querySelectorAll("h1, h2, h3, p, a:not(.social-btn), button, span, label, strong").forEach((el, i) => {
       originalTexts[i] = el.textContent.trim();
       el.dataset.textId = i;
     });
   }
 
-  // Traducir textos generales (con detección flexible)
-  document.querySelectorAll("h1, h2, h3, p, a, button, span, label, strong").forEach(el => {
+  // Traducir textos generales (excluyendo redes sociales)
+  document.querySelectorAll("h1, h2, h3, p, a:not(.social-btn), button, span, label, strong").forEach(el => {
     const id = el.dataset.textId;
     if (!id) return;
     const original = originalTexts[id];
@@ -347,13 +347,13 @@ function toggleLanguage() {
       const norm = normalizeText(el.dataset.originalText);
       let found = false;
       for (const [key, val] of Object.entries(dict)) {
-        if (norm.includes(key)) { // ← aquí está la diferencia clave
+        if (norm.includes(key)) {
           el.textContent = val;
           found = true;
           break;
         }
       }
-      if (!found) el.textContent = el.dataset.originalText; // si no se encuentra, deja el original
+      if (!found) el.textContent = el.dataset.originalText;
     } else {
       el.textContent = el.dataset.originalText;
     }
