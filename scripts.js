@@ -72,12 +72,16 @@ function actualizarCarrito() {
   const count = document.getElementById("cartCount");
   const empty = document.getElementById("cartEmpty");
 
+  if (!items || !total || !count || !empty) return;
+
   items.innerHTML = "";
   let totalValue = 0;
+  let totalProductos = 0;
 
   carrito.forEach((item, i) => {
     const subtotal = item.precio * item.cantidad;
     totalValue += subtotal;
+    totalProductos += item.cantidad;
 
     items.innerHTML += `
       <div class="cart-item">
@@ -94,9 +98,16 @@ function actualizarCarrito() {
     `;
   });
 
-  total.textContent = totalValue.toLocaleString();
-  count.textContent = carrito.length;
+  total.textContent = totalValue.toLocaleString("es-CO");
+  count.textContent = totalProductos;
   empty.style.display = carrito.length ? "none" : "block";
+
+  // Actualiza el texto del botón del carrito
+  const cartButton = document.querySelector(".cart-toggle");
+  if (cartButton) {
+    const label = (currentLang === "en") ? "Cart" : "Carrito";
+    cartButton.innerHTML = `🛒 ${label} (<span id="cartCount">${totalProductos}</span>)`;
+  }
 }
 
 // ==================== LOCALSTORAGE ====================
@@ -379,19 +390,48 @@ function toggleLanguage() {
   if (clearBtn) clearBtn.textContent = isToEnglish ? "Empty Cart" : "Vaciar carrito";
 
   // Traducir misión y visión
-  const nosotros = document.getElementById("nosotros");
-  if (nosotros) {
-    const p = nosotros.querySelectorAll("p");
-    if (p.length >= 3) {
-      if (isToEnglish) {
-        p[1].textContent = dict["mision_text"];
-        p[2].textContent = dict["vision_text"];
-      } else {
-        p[1].textContent = originalTexts[p[1].dataset.textId];
-        p[2].textContent = originalTexts[p[2].dataset.textId];
-      }
-    }
+ // Traducir justificación, misión y visión
+const nosotros = document.getElementById("nosotros");
+if (nosotros) {
+  const p = nosotros.querySelectorAll("p");
+
+  // Justificación (busca por ID o posición)
+  const justEs = document.getElementById("justificacion-es");
+  const justEn = document.getElementById("justificacion-en");
+
+  if (justEs && justEn) {
+    justEs.style.display = isToEnglish ? "none" : "block";
+    justEn.style.display = isToEnglish ? "block" : "none";
   }
+
+  // Misión
+  const misionEs = document.getElementById("mision-es");
+  const misionEn = document.getElementById("mision-en");
+
+  if (misionEs && misionEn) {
+    misionEs.style.display = isToEnglish ? "none" : "block";
+    misionEn.style.display = isToEnglish ? "block" : "none";
+  }
+
+  // Visión
+  const visionEs = document.getElementById("vision-es");
+  const visionEn = document.getElementById("vision-en");
+
+  if (visionEs && visionEn) {
+    visionEs.style.display = isToEnglish ? "none" : "block";
+    visionEn.style.display = isToEnglish ? "block" : "none";
+  }
+
+  // Actualiza títulos
+  const titJust = document.getElementById("titulo-justificacion");
+  const titMision = document.getElementById("titulo-mision");
+  const titVision = document.getElementById("titulo-vision");
+
+  if (titJust) titJust.textContent = isToEnglish ? "Justification" : "Justificación";
+  if (titMision) titMision.textContent = isToEnglish ? "Mission" : "Misión";
+  if (titVision) titVision.textContent = isToEnglish ? "Vision" : "Visión";
+}
+
 
   // Cambiar idioma actual
   currentLang = isToEnglish ? "en" : "es";
